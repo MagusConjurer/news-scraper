@@ -26,13 +26,19 @@ router.get("/scrape", function(req,res) {
       result.summary = $(this).find(".synopsis").text();
       result.url = $(this).children("a").attr("href");
 
-      db.Article.create(result)
-        .then(function(dbArticle) {
-          console.log(dbArticle);
-        })
-        .catch(function(err) {
-          console.log(err);
-        });
+      // Check if article exists and only add if it does not
+      db.Article.findOne({title: result.title}, function(err, result) {
+        if(err) console.log(err);
+        if(!result) {
+          db.Article.create(result)
+            .then(function(dbArticle) {
+              console.log(dbArticle);
+            })
+            .catch(function(err) {
+              console.log(err);
+          });
+        };
+      });  
     });
 
     res.send("Articles have been scraped.")
