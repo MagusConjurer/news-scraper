@@ -6,7 +6,10 @@ var db = require("../models");
 
 // Default route
 router.get("/", function(req, res) {
-  res.render("articles");
+  db.Article.find({})
+    .then(function(data) {
+      
+    })
 });
 
 
@@ -47,9 +50,9 @@ router.get("/scrape", function(req,res) {
 
 // Route for retrieving all articles from the DB
 router.get("/articles", function(req, res) {
-  db.Article.find({})
+  db.Article.find({}).lean()
     .then(function(dbArticle) {
-      res.json(dbArticle);
+      res.render("articles", {article: dbArticle});
     })
     .catch(function(err) {
       res.json(err);
@@ -61,7 +64,6 @@ router.get("/articles/:id", function(req, res) {
   db.Article.find({_id: req.params.id})
   .populate("comments")
   .then(function(dbArticle) {
-    console.log(dbArticle)
     res.json(dbArticle);
   })
   .catch(function(err) {
