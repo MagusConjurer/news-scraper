@@ -1,6 +1,6 @@
 var express = require("express");
 var handlebars = require("express-handlebars")
-var routes = require("./controllers/controller");
+var router = require("./controllers/controller");
 var mongoose = require("mongoose");
 
 var PORT = process.env.PORT || 3000;
@@ -18,10 +18,10 @@ app.use(express.static("public"));
 // Setup Handlebars
 app.engine("handlebars", handlebars({defaultLayout: "main"}));
 app.set("view engine", "handlebars");
-app.use(routes);
+app.use(router);
 
 // Connect to Mongo DB using mLab or use the local database
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/spacenews";
 
 mongoose.connect(MONGODB_URI);
 
