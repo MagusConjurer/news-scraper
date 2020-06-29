@@ -4,25 +4,38 @@ var axios = require("axios");
 var cheerio = require("cheerio");
 var db = require("../models");
 
+// Default route
+router.get("/", function(req, res) {
+  res.render("articles");
+});
+
+
 // Route for scraping data from 
 router.get("/scrape", function(req,res) {
 
   axios.get("https://www.space.com/news").then(function(response) {
     var $ = cheerio.load(response.data);
+    // Remove sponsored posts, which do not include the same fields as articles
+    $(".sponsored-post").remove();
 
-    $("").each(function(i, element) {
+    $(".listingResult").each(function(i, element) {
       var result = {};
+      
+      // Add the title, href and summary of the articles.
+      result.title = $(this).find(".article-name").text();
+      result.summary = $(this).find(".synopsis").text();
+      result.url = $(this).children("a").attr("href");
 
-      // Add the text and href of every link, saving them as properties.
-      // result.title = $(this).children("a").text();
-      // result.link = $(this).children("a").attr("href");
-      // result.summary = $(this)
-
-
+      db.Article.create(result)
+        .then(function(dbArticle) {
+          console.log(dbArticle);
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
     });
 
-    res.send("Articles have been scraped");
-    res.json($(this));
+    res.send("Articles have been scraped.")
   });
 });
 
