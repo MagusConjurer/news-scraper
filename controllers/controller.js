@@ -46,18 +46,42 @@ router.get("/scrape", function(req,res) {
 });
 
 // Route for retrieving all articles from the DB
-router.get("", function(req, res) {
-
+router.get("/articles", function(req, res) {
+  db.Article.find({})
+    .then(function(dbArticle) {
+      res.json(dbArticle);
+    })
+    .catch(function(err) {
+      res.json(err);
+    })
 });
 
 // Route for grabbing a specific article by ID, along with its comments
-router.get("", function(req, res) {
-
+router.get("/articles/:id", function(req, res) {
+  db.Article.find({_id: req.params.id})
+  .populate("comments")
+  .then(function(dbArticle) {
+    console.log(dbArticle)
+    res.json(dbArticle);
+  })
+  .catch(function(err) {
+    res.json(err);
+  })
 });
 
 // Route for saving/updating an articles comments
-router.post("", function(req,res) {
-
+router.post("/articles/:id", function(req,res) {
+  db.Comment.create(req.body)
+    .then(function(dbComment) {
+      return db.Article.findOneAndUpdate({_id: req.params.id}, 
+        {$push: {comments: dbComment._id}}, {new: true});
+    })
+    .then(function(dbArticle) {
+      res.json(dbArticle);
+    })
+    .catch(function(err) {
+      res.json(err);
+    })
 });
 
 module.exports = router;
