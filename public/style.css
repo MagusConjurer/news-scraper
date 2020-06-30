@@ -6,10 +6,6 @@
   margin-bottom: 15px;
 }
 
-a {
+.article-btn {
   margin: 0px 3%;
-}
-
-.article-buttons {
-  align-content: center;
 }

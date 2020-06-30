@@ -1,30 +1,22 @@
-<div class="container">
-  <nav class="navbar navbar-dark bg-dark">
-      <a class="navbar-brand" href="https://magusconjurer.github.io/portfolio.html">Return to Portfolio</a>
-  </nav>
-  <h1>News from Space</h1>
-  <div class="card-deck">
-    {{#each article}}
-      <div class="col-md-6">
-        <div class="card text-white bg-dark">
-          <div class="card-body">
-            <h4 class="card-title">{{title}}</h4>
-            <p class="card-text">{{summary}}</p>
-            <div class="row justify-content-center">
-              <a href={{url}} target=" ">
-                <button type="button" class="btn btn-secondary">Read</button>
-              </a>
-              <a href="" target=" ">
-                <button type="button" class="btn btn-secondary">Save</button>
-              </a>
-              <a href="" target=" ">
-                <button type="button" class="btn btn-secondary">Comments</button>
-              </a>
-            </div>
-            
+<h1>News from Space</h1>
+<div class="card-deck">
+  {{#each article}}
+    <div class="col-md-6">
+      <div class="card text-white bg-dark">
+        <div class="card-body">
+          <h4 class="card-title">{{title}}</h4>
+          <p class="card-text">{{summary}}</p>
+          <div class="row justify-content-center">
+            <a href={{url}} target=" " class="article-btn">
+              <button type="button" class="btn btn-secondary">Read</button>
+            </a>
+            <button type="button" class="btn btn-secondary article-btn save-btn" data-id={{_id}}>Save</button>
+            <a href="" target=" " class="article-btn">
+              <button type="button" class="btn btn-secondary comments-btn" data-id={{_id}}>Comments</button>
+            </a>
           </div>
         </div>
       </div>
-    {{/each}}
-  </div>
+    </div>
+  {{/each}}
 </div>
