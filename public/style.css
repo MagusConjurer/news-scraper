@@ -5,3 +5,11 @@
 .col-md-6 {
   margin-bottom: 15px;
 }
+
+a {
+  margin: 0px 3%;
+}
+
+.article-buttons {
+  align-content: center;
+}

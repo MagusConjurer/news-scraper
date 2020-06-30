@@ -6,11 +6,22 @@
   <div class="card-deck">
     {{#each article}}
       <div class="col-md-6">
-        <div class="card">
+        <div class="card text-white bg-dark">
           <div class="card-body">
             <h4 class="card-title">{{title}}</h4>
             <p class="card-text">{{summary}}</p>
-            <a href={{url}} target=" ">Read the article here</a>
+            <div class="row justify-content-center">
+              <a href={{url}} target=" ">
+                <button type="button" class="btn btn-secondary">Read</button>
+              </a>
+              <a href="" target=" ">
+                <button type="button" class="btn btn-secondary">Save</button>
+              </a>
+              <a href="" target=" ">
+                <button type="button" class="btn btn-secondary">Comments</button>
+              </a>
+            </div>
+            
           </div>
         </div>
       </div>

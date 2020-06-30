@@ -28,11 +28,10 @@ router.get("/scrape", function(req,res) {
       result.title = $(this).find(".article-name").text();
       result.summary = $(this).find(".synopsis").text();
       result.url = $(this).children("a").attr("href");
-
       // Check if article exists and only add if it does not
-      db.Article.findOne({title: result.title}, function(err, result) {
+      db.Article.findOne({title: result.title}, function(err, value) {
         if(err) console.log(err);
-        if(!result) {
+        if(!value) {
           db.Article.create(result)
             .then(function(dbArticle) {
               console.log(dbArticle);
@@ -43,7 +42,7 @@ router.get("/scrape", function(req,res) {
         };
       });  
     });
-
+    
     res.send("Articles have been scraped.")
   });
 });
