@@ -8,12 +8,8 @@ var savedArticles;
 
 // Default route
 router.get("/", function(req, res) {
-  db.Article.find({})
-    .then(function(data) {
-      
-    })
+  res.redirect("/articles");
 });
-
 
 // Route for scraping data from 
 router.get("/scrape", function(req,res) {
@@ -73,10 +69,11 @@ router.get("/saved", function(req, res) {
 
 // Route for grabbing a specific article by ID, along with its comments
 router.get("/articles/:id", function(req, res) {
-  db.Article.find({_id: req.params.id})
+  db.Article.findOne({_id: req.params.id}).lean()
   .populate("comments")
   .then(function(dbArticle) {
-    res.json(dbArticle);
+    //console.log(dbArticle);
+    res.render("comment", {article: dbArticle});
   })
   .catch(function(err) {
     res.json(err);

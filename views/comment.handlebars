@@ -1,0 +1,16 @@
+
+<div class="col-md-12">
+  <div class="card text-white bg-dark">
+    <div class="card-body">
+      <h4 class="card-title">{{article.title}}</h4>
+      <p class="card-text">{{article.summary}}</p>
+      <div class="row justify-content-center">
+        <a href={{article.url}} target=" " class="article-btn">
+          <button type="button" class="btn btn-secondary">Read</button>
+        </a>
+        <button type="button" class="btn btn-secondary article-btn" data-id={{_id}}>Comments</button>
+      </div>
+    </div>
+  </div>
+</div>
+

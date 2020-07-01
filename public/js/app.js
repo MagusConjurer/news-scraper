@@ -25,5 +25,5 @@ $(document).on("click", ".save-btn", function(event) {
 $(document).on("click", ".comments-btn", function(event) {
   event.preventDefault();
 
-
+  window.location = "/articles/" + $(this).attr("data-id");
 });
