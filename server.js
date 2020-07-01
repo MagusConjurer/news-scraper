@@ -3,7 +3,7 @@ var handlebars = require("express-handlebars")
 var router = require("./controllers/controller");
 var mongoose = require("mongoose");
 
-var PORT = process.env.PORT || 3000;
+var PORT = process.env.PORT || 8080;
 
 // Initialize Express
 var app = express();

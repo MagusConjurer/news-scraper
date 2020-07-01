@@ -4,6 +4,12 @@ var axios = require("axios");
 var cheerio = require("cheerio");
 var db = require("../models");
 
+// Define local storage for use in Node
+if (typeof localStorage === "undefined" || localStorage === null) {
+  var LocalStorage = require('node-localstorage').LocalStorage;
+  localStorage = new LocalStorage('./scratch');
+};
+
 // Default route
 router.get("/", function(req, res) {
   db.Article.find({})
@@ -58,6 +64,18 @@ router.get("/articles", function(req, res) {
     })
 });
 
+router.get("/saved", function(req, res) {
+  var savedArticles = JSON.parse(localStorage.getItem("saved"));
+  console.log(savedArticles);
+  db.Article.find({_id: { $in: savedArticles}}).lean() 
+    .then(function(dbArticle) {
+      res.render("saved", {article: dbArticle});
+    })
+    .catch(function(err) {
+      res.json(err);
+    })
+});
+
 // Route for grabbing a specific article by ID, along with its comments
 router.get("/articles/:id", function(req, res) {
   db.Article.find({_id: req.params.id})
@@ -83,6 +101,11 @@ router.post("/articles/:id", function(req,res) {
     .catch(function(err) {
       res.json(err);
     })
+});
+
+router.post("/saved", function(req, res) {
+  console.log(req.body);
+  // localStorage.setItem("saved", req)
 });
 
 module.exports = router;

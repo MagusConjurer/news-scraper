@@ -1,0 +1,28 @@
+<h1>Saved Articles</h1>
+<div class="accordion" id="saved-accordion">
+  {{#each article}}
+    <div class="col-md-12">
+      <div class="card text-white bg-dark">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-8">
+              <h4 class="card-title">{{title}}</h4>
+              <p class="card-text">{{summary}}</p>
+            </div>
+            <div class="col-md-4">
+              <div class="row justify-content-center">
+                <a href={{url}} target=" " class="article-btn">
+                  <button type="button" class="btn btn-secondary">Read</button>
+                </a>
+                <button type="button" class="btn btn-secondary article-btn remove-btn" data-id={{_id}}>Remove</button>
+                <a href="" target=" " class="article-btn">
+                  <button type="button" class="btn btn-secondary comments-btn" data-id={{_id}}>Comments</button>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {{/each}}
+</div>
