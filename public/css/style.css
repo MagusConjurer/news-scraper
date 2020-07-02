@@ -10,3 +10,7 @@
   margin: 2% 2%;
 }
 
+.modal-content {
+  color: white;
+  background-color: #202020;
+}

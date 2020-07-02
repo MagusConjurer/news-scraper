@@ -8,7 +8,46 @@
         <a href={{article.url}} target=" " class="article-btn">
           <button type="button" class="btn btn-secondary">Read</button>
         </a>
-        <button type="button" class="btn btn-secondary article-btn" data-id={{_id}}>Comments</button>
+        <button type="button" class="btn btn-secondary article-btn save-btn" data-id={{_id}}>Save</button>
+      </div>
+    </div>
+  </div>
+  <div class="card text-white bg-dark">
+    <div class="card-header">
+      Comments
+    </div>
+    <ul class="list-group list-group-flush">
+      {{#each article.comments}}
+        <li class="list-group-item">{{article.comments.title}} | {{article.comments.body}}</li>
+      {{/each}}
+    </ul>
+    <button type="button" class="btn btn-secondary add-btn" data-toggle="modal" data-target="#commentModal">Add Comment</button>
+  </div>
+  <!-- Modal for comment form -->
+  <div class="modal fade" id="commentModal" tabindex="-1" role="dialog" aria-labelledby="commentModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="commentModalLabel">Leave a Comment</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="commentTitle">Title</label>
+              <input type="text" class="form-control" id="commentTitle">
+            </div>
+            <div class="form-group">
+              <label for="commentBody">Your Comment</label>
+              <textarea class="form-control" id="commentBody" rows="3"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-secondary" id="commentSave">Save</button>
+        </div>
       </div>
     </div>
   </div>
