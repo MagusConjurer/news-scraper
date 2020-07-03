@@ -17,9 +17,15 @@
       Comments
     </div>
     <ul class="list-group list-group-flush">
-      {{#article/comments}}
-          <li class="list-group-item">{{title}} | {{body}}</li>
-      {{/article/comments}}
+      {{#article}}
+        {{#each comments}}
+          <li class="list-group-item">
+            <h4>{{title}}</h4> 
+            <button type="button" class="btn btn-dark btn-delete float-right" data-id={{_id}}>X</button>
+            {{body}}
+          </li>
+        {{/each}}
+      {{/article}}
     </ul>
     <button type="button" class="btn btn-secondary add-btn" data-toggle="modal" data-target="#commentModal">Add Comment</button>
   </div>

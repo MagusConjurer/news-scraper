@@ -47,8 +47,8 @@ $(document).on("click", "#commentSave", function(event) {
     $("#commentBody").val("");
     $("#commentTitle").val("");
 
-    // window.location = URL;
-    console.log("Comment added")
+    window.location = URL;
+
   });
 
 });
