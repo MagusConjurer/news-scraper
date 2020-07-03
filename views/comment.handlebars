@@ -2,13 +2,13 @@
 <div class="col-md-12">
   <div class="card text-white bg-dark">
     <div class="card-body">
-      <h4 class="card-title">{{article.title}}</h4>
-      <p class="card-text">{{article.summary}}</p>
+      <h4 class="card-title">{{article/title}}</h4>
+      <p class="card-text">{{article/summary}}</p>
       <div class="row justify-content-center">
         <a href={{article.url}} target=" " class="article-btn">
           <button type="button" class="btn btn-secondary">Read</button>
         </a>
-        <button type="button" class="btn btn-secondary article-btn save-btn" data-id={{_id}}>Save</button>
+        <button type="button" class="btn btn-secondary article-btn save-btn" data-id={{article/_id}}>Save</button>
       </div>
     </div>
   </div>
@@ -17,8 +17,8 @@
       Comments
     </div>
     <ul class="list-group list-group-flush">
-      {{#each article.comments}}
-        <li class="list-group-item">{{article.comments.title}} | {{article.comments.body}}</li>
+      {{#each article/comments}}
+        <li class="list-group-item">{{comments.title}} | {{comments.body}}</li>
       {{/each}}
     </ul>
     <button type="button" class="btn btn-secondary add-btn" data-toggle="modal" data-target="#commentModal">Add Comment</button>
@@ -46,10 +46,9 @@
           </form>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-secondary" id="commentSave">Save</button>
+          <button type="submit" class="btn btn-dark" id="commentSave" data-id={{article/_id}}>Save</button>
         </div>
       </div>
     </div>
   </div>
 </div>
-

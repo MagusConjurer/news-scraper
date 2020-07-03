@@ -67,17 +67,22 @@ router.get("/saved", function(req, res) {
     })
 });
 
-// Route for grabbing a specific article by ID, along with its comments
-router.get("/articles/:id", function(req, res) {
-  db.Article.findOne({_id: req.params.id}).lean()
+
+function renderComments(commentID, res) {
+  db.Article.findOne({_id: commentID}).lean()
   .populate("comments")
   .then(function(dbArticle) {
-    //console.log(dbArticle);
+    console.log(dbArticle);
     res.render("comment", {article: dbArticle});
   })
   .catch(function(err) {
     res.json(err);
   })
+}
+
+// Route for grabbing a specific article by ID, along with its comments
+router.get("/articles/:id", function(req, res) {
+  renderComments(req.params.id, res);
 });
 
 // Route for saving/updating an articles comments
@@ -85,10 +90,10 @@ router.post("/articles/:id", function(req,res) {
   db.Comment.create(req.body)
     .then(function(dbComment) {
       return db.Article.findOneAndUpdate({_id: req.params.id}, 
-        {$push: {comments: dbComment._id}}, {new: true});
+        {$push: {comments: dbComment}}, {new: true});
     })
-    .then(function(dbArticle) {
-      res.json(dbArticle);
+    .then(function() {
+      renderComments(req.params.id, res);
     })
     .catch(function(err) {
       res.json(err);

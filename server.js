@@ -23,6 +23,11 @@ app.use(router);
 // Connect to Mongo DB using mLab or use the local database
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/spacenews";
 
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
+mongoose.set('useUnifiedTopology', true);
+
 mongoose.connect(MONGODB_URI);
 
 app.listen(PORT, function(){

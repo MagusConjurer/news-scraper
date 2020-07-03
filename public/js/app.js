@@ -27,3 +27,28 @@ $(document).on("click", ".comments-btn", function(event) {
 
   window.location = "/articles/" + $(this).attr("data-id");
 });
+
+$(document).on("click", "#commentSave", function(event) {
+  event.preventDefault();
+
+  var commentTitle = $("#commentTitle").val();
+  var commentBody = $("#commentBody").val();
+
+  var URL = "/articles/" + $(this).attr("data-id");
+
+  $.ajax({
+    url: URL,
+    type: "POST",
+    data: {
+      title: commentTitle,
+      body: commentBody
+    }
+  }).done(function() {
+    $("#commentBody").val("");
+    $("#commentTitle").val("");
+
+    // window.location = URL;
+    console.log("Comment added")
+  });
+
+});
