@@ -89,7 +89,14 @@ router.post("/articles/:id", function(req,res) {
   db.Comment.create(req.body)
     .then(function(dbComment) {
       return db.Article.findOneAndUpdate({_id: req.params.id}, 
-        {$push: {comments: dbComment._id}}, {new: true});
+        {$push: 
+          {comments: 
+            {
+              $each: dbComment._id,
+              $position: 0
+            } 
+          }
+        }, {new: true});
     })
     .then(function() {
       renderComments(req.params.id, res);

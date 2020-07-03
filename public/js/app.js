@@ -6,6 +6,18 @@ function postLocal(arr) {
   })
 };
 
+$(document).ready(function() {
+  $.ajax({
+    url:"/scrape",
+    type: "GET"
+  })
+  .done(function() {
+    setTimeout(function() {
+      $(".card-deck").load(location.href + " .card-deck");
+    }, 2000);
+  });
+})
+
 $(document).on("click", ".save-btn", function(event) {
   event.preventDefault();
   let id = $(this).attr("data-id");
