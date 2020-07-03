@@ -72,7 +72,7 @@ function renderComments(commentID, res) {
   db.Article.findOne({_id: commentID}).lean()
   .populate("comments")
   .then(function(dbArticle) {
-    console.log(dbArticle);
+    console.log(dbArticle.comments);
     res.render("comment", {article: dbArticle});
   })
   .catch(function(err) {
@@ -90,10 +90,7 @@ router.post("/articles/:id", function(req,res) {
   db.Comment.create(req.body)
     .then(function(dbComment) {
       return db.Article.findOneAndUpdate({_id: req.params.id}, 
-        {$push: {comments: dbComment}}, {new: true});
-    })
-    .then(function() {
-      renderComments(req.params.id, res);
+        {$push: {comments: dbComment._id}}, {new: true});
     })
     .catch(function(err) {
       res.json(err);
