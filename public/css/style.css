@@ -1,3 +1,14 @@
+body {
+  color: #ffffff;
+  background-image: url(../images/dark_brick_wall/dark_brick_wall.png);
+  font-family: "Nanum Gothic";
+}
+
+.navbar-brand{
+  font-family: "Shadows Into Light";
+  letter-spacing: 3px;
+}
+
 .card {
   height: 100%;
 }
@@ -17,4 +28,20 @@
 
 .list-group-item {
   color: black;
+}
+
+.menu-link {
+  margin: 0px 5px;
+}
+
+.menu-link:link, .menu-link:visited {
+  color: #A7C8C6;
+}
+
+.menu-link:hover {
+  color: #84DFDB;
+}
+
+.menu-link:active {
+  color:#4aaaa5;
 }
